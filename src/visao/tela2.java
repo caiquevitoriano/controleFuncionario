@@ -27,44 +27,27 @@ public class tela2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CO = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        CO.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
-        CO.setForeground(new java.awt.Color(254, 254, 254));
-        CO.setText("C O N T R O L E");
-        getContentPane().add(CO);
-        CO.setBounds(130, 50, 250, 40);
+        jMenu1.setText("File");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/caique/NetBeansProjects/ControleFuncionario/img/apps.png")); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 30, 70, 70);
+        jMenu3.setText("jMenu3");
+        jMenu1.add(jMenu3);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/caique/NetBeansProjects/ControleFuncionario/img/729d772bf4ac64194477248b20190e6e.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 800, 120);
+        jMenuBar1.add(jMenu1);
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(40, 150, 72, 29);
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(130, 150, 72, 29);
-
-        jButton3.setText("jButton3");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(240, 150, 72, 29);
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,11 +88,9 @@ public class tela2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CO;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
