@@ -29,7 +29,7 @@ public class Tela7 extends javax.swing.JFrame {
         try{
         dao = new FuncionarioDaoImpl();
         }catch(IOException ex){
-            
+            JOptionPane.showMessageDialog(null, "Falha ao abrir arquivo");
         }
     }
 
@@ -174,8 +174,8 @@ public class Tela7 extends javax.swing.JFrame {
        Funcionario f = montarObjeto();
        
        try{
-           if(dao.salvar(f)){
-               JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+           if(dao.salvar(f) == true){
+               JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
            }else{
                JOptionPane.showMessageDialog(null, "Falha ao Salvar");
            }
