@@ -5,23 +5,27 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author caique
  */
-public class Usuario {
+public class Usuario implements Serializable {
     
     private String email;
     private String nome;
     private String senha;
 
+    public Usuario() {
+    }
+    
     public Usuario(String email, String nome, String senha) {
         this.email = email;
         this.nome = nome;
         this.senha = senha;
-    }
+    }   
 
     public String getEmail() {
         return email;
