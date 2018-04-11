@@ -15,13 +15,11 @@ import java.util.Objects;
 public class Supervisor {
     
     private String nome;
-    private int codigo;
     private int cpf;
     private LocalDate nascimento;
 
-    public Supervisor(String nome, int codigo, int cpf, LocalDate nascimento) {
-        this.nome = nome;
-        this.codigo = codigo;
+    public Supervisor(String nome, int cpf, LocalDate nascimento) {
+        this.nome = nome;        
         this.cpf = cpf;
         this.nascimento = nascimento;
     }
@@ -32,14 +30,6 @@ public class Supervisor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
     }
 
     public int getCpf() {
@@ -62,7 +52,6 @@ public class Supervisor {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + this.codigo;
         hash = 67 * hash + this.cpf;
         hash = 67 * hash + Objects.hashCode(this.nascimento);
         return hash;
@@ -80,9 +69,7 @@ public class Supervisor {
             return false;
         }
         final Supervisor other = (Supervisor) obj;
-        if (this.codigo != other.codigo) {
-            return false;
-        }
+        
         if (this.cpf != other.cpf) {
             return false;
         }
@@ -97,7 +84,7 @@ public class Supervisor {
 
     @Override
     public String toString() {
-        return "Supervisor{" + "nome=" + nome + ", codigo=" + codigo + ", cpf=" + cpf + ", nascimento=" + nascimento + '}';
+        return "Supervisor{" + "nome=" + nome + ", cpf=" + cpf + ", nascimento=" + nascimento + '}';
     }
     
     

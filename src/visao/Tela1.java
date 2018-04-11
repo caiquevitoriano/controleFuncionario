@@ -32,7 +32,6 @@ public class Tela1 extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        criarnovo = new javax.swing.JButton();
         entrar = new javax.swing.JButton();
         fundo = new javax.swing.JLabel();
 
@@ -42,7 +41,7 @@ public class Tela1 extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        icon.setIcon(new javax.swing.ImageIcon("/home/caique/NetBeansProjects/ControleFuncionario/img/user.png")); // NOI18N
+        icon.setIcon(new javax.swing.ImageIcon("C:\\Users\\caiq-\\Documents\\NetBeansProjects\\controleFuncionario\\img\\user.png")); // NOI18N
         icon.setText("jLabel2");
         getContentPane().add(icon);
         icon.setBounds(350, 90, 130, 130);
@@ -50,25 +49,16 @@ public class Tela1 extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setText("Usuario:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(300, 250, 70, 17);
+        jLabel1.setBounds(300, 250, 70, 14);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(300, 270, 230, 27);
+        jTextField1.setBounds(300, 270, 230, 20);
 
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("Senha:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(300, 320, 47, 17);
+        jLabel2.setBounds(300, 320, 70, 14);
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(300, 340, 230, 27);
-
-        criarnovo.setText("Criar");
-        criarnovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                criarnovoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(criarnovo);
-        criarnovo.setBounds(320, 380, 80, 40);
+        jPasswordField1.setBounds(300, 340, 230, 20);
 
         entrar.setText("Entrar");
         entrar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,9 +67,9 @@ public class Tela1 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(entrar);
-        entrar.setBounds(420, 380, 80, 40);
+        entrar.setBounds(340, 380, 160, 40);
 
-        fundo.setIcon(new javax.swing.ImageIcon("/home/caique/NetBeansProjects/ControleFuncionario/img/729d772bf4ac64194477248b20190e6e.jpg")); // NOI18N
+        fundo.setIcon(new javax.swing.ImageIcon("C:\\Users\\caiq-\\Documents\\NetBeansProjects\\controleFuncionario\\img\\729d772bf4ac64194477248b20190e6e.jpg")); // NOI18N
         fundo.setText("jLabel3");
         getContentPane().add(fundo);
         fundo.setBounds(0, 0, 800, 600);
@@ -88,12 +78,10 @@ public class Tela1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        // TODO add your handling code here:
+       
+        Tela2 tela2 = new Tela2();
+        tela2.setVisible(true);
     }//GEN-LAST:event_entrarActionPerformed
-
-    private void criarnovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarnovoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_criarnovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +119,6 @@ public class Tela1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton criarnovo;
     private javax.swing.JButton entrar;
     private javax.swing.JLabel fundo;
     private javax.swing.JLabel icon;
