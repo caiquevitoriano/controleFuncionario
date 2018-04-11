@@ -25,7 +25,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao<Funcionario>{
 
     public FuncionarioDaoImpl() throws IOException {
         
-        file = new File("Arquivo/funcionarios.bin");
+        file = new File("Arquivos/funcionarios.txt");
 
         if (!file.exists()) {
             file.createNewFile();
@@ -33,7 +33,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao<Funcionario>{
     }
     
     @Override
-    public boolean salvar(Funcionario f) throws IOException, ClassNotFoundException,NullPointerException{
+    public boolean salvar(Funcionario f) throws IOException, ClassNotFoundException{
          if (buscar(f.getCpf()) == null) {
            
             List<Funcionario> funcionarios = listar();
