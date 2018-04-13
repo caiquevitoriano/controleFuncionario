@@ -55,7 +55,7 @@ public class tela5 extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel1.setText("Supervisor");
+        jLabel1.setText("Funcionario");
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\caiq-\\Documents\\NetBeansProjects\\controleFuncionario\\img\\user (2).png")); // NOI18N
 
@@ -66,7 +66,7 @@ public class tela5 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(158, Short.MAX_VALUE)
+                        .addContainerGap(146, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel2Layout.createSequentialGroup()

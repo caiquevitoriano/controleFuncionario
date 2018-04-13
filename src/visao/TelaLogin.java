@@ -5,16 +5,26 @@
  */
 package visao;
 
+import controle.UsuarioDao;
+import controle.UsuarioDaoImpl;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
+
 /**
  *
  * @author caique
  */
-public class Tela1 extends javax.swing.JFrame {
+public class TelaLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form Tela1
      */
-    public Tela1() {
+    private UsuarioDaoImpl user;
+
+    public TelaLogin() {
         initComponents();
     }
 
@@ -29,9 +39,9 @@ public class Tela1 extends javax.swing.JFrame {
 
         icon = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        senha = new javax.swing.JPasswordField();
         entrar = new javax.swing.JButton();
         fundo = new javax.swing.JLabel();
 
@@ -50,15 +60,21 @@ public class Tela1 extends javax.swing.JFrame {
         jLabel1.setText("Usuario:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(300, 250, 70, 14);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(300, 270, 230, 20);
+
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        getContentPane().add(email);
+        email.setBounds(300, 270, 230, 30);
 
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("Senha:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(300, 320, 70, 14);
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(300, 340, 230, 20);
+        getContentPane().add(senha);
+        senha.setBounds(300, 340, 230, 30);
 
         entrar.setText("Entrar");
         entrar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,10 +94,34 @@ public class Tela1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-       
-        Tela2 tela2 = new Tela2();
-        tela2.setVisible(true);
+        String senhaText = new String(senha.getPassword());
+        UsuarioDao usuarios = null;
+        try {
+            
+            usuarios = new UsuarioDaoImpl();
+            Usuario logado = usuarios.userLogin(email.getText(), senhaText);
+            
+            if (logado != null) {
+                TelaMenu menu = new TelaMenu(logado);
+                menu.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro no email ou senha, "
+                    + "verifique se infromou corretamente e tente de novo!");
+            }
+            
+            
+           
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_entrarActionPerformed
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -100,31 +140,32 @@ public class Tela1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tela1().setVisible(true);
+                new TelaLogin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField email;
     private javax.swing.JButton entrar;
     private javax.swing.JLabel fundo;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables
 }

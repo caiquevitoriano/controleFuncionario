@@ -26,6 +26,6 @@ public interface UsuarioDao {
     
     public boolean atualizar(Usuario u) throws IOException, ClassNotFoundException ;
        
-       
+    public Usuario userLogin(String email, String senha) throws IOException, ClassNotFoundException;   
     
 }

@@ -16,7 +16,6 @@ public class Departamento {
     
     private String nome;
     private int codigo;
-    private Supervisor supervisor;
     private List produtos[];
 
     public String getNome() {
@@ -35,14 +34,6 @@ public class Departamento {
         this.codigo = codigo;
     }
 
-    public Supervisor getSupervisor() {
-        return supervisor;
-    }
-
-    public void setSupervisor(Supervisor supervisor) {
-        this.supervisor = supervisor;
-    }
-
     public List[] getProdutos() {
         return produtos;
     }
@@ -51,10 +42,6 @@ public class Departamento {
         this.produtos = produtos;
     }
     
-    
-    
-    
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -85,7 +72,7 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Departamento{" + "nome=" + nome + ", codigo=" + codigo + ", supervisor=" + supervisor + ", produtos=" + produtos + '}';
+        return "Departamento{" + "nome=" + nome + ", codigo=" + codigo + ", produtos=" + produtos + '}';
     }
 
    
