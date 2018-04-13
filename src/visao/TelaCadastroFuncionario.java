@@ -5,24 +5,32 @@
  */
 package visao;
 
-import controle.ProdutoDao;
+import controle.FuncionarioDao;
+import controle.FuncionarioDaoImpl;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import modelo.Produto;
+import modelo.Funcionario;
 
 /**
  *
  * @author caique
  */
-public class tela6 extends javax.swing.JFrame {
+public class TelaCadastroFuncionario extends javax.swing.JFrame {
 
     /**
      * Creates new form tela3
      */
-    private ProdutoDao dao;
     
-    public tela6() {
+    private FuncionarioDao dao;
+            
+    public TelaCadastroFuncionario() {
         initComponents();
+        
+        try {
+            dao = new FuncionarioDaoImpl();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "erro");
+        }
     }
 
     /**
@@ -43,16 +51,14 @@ public class tela6 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        nomeProduto = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        nome = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        valorProduto = new javax.swing.JFormattedTextField();
-        codigoProduto = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        quantidadeProduto = new javax.swing.JSpinner();
+        cpf = new javax.swing.JFormattedTextField();
+        nascimento = new javax.swing.JFormattedTextField();
 
         jTextField3.setText("jTextField3");
 
@@ -64,7 +70,7 @@ public class tela6 extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel1.setText("Produto");
+        jLabel1.setText("Funcionario");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -73,7 +79,7 @@ public class tela6 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(146, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -95,11 +101,9 @@ public class tela6 extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        jLabel2.setText("Codigo");
+        jLabel2.setText("CPF:");
 
         jLabel3.setText("Nome:");
-
-        jLabel4.setText("Valor:");
 
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,17 +133,19 @@ public class tela6 extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Nascimento:");
+
         try {
-            valorProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.###,##")));
+            cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        codigoProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-
-        jLabel7.setText("Quantidade");
-
-        quantidadeProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        try {
+            nascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,28 +155,24 @@ public class tela6 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valorProduto)
-                    .addComponent(nomeProduto)
+                    .addComponent(nascimento)
+                    .addComponent(nome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(codigoProduto)
-                        .addGap(18, 18, 18)
+                        .addComponent(cpf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(39, 39, 39)
                         .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(quantidadeProduto)))
+                            .addComponent(jLabel7))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,22 +182,18 @@ public class tela6 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(codigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(valorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
@@ -211,39 +209,37 @@ public class tela6 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    
-         Produto p = montarObjeto();
+       
+        Funcionario f = montarObjeto();
         
         try {
-            if(dao.salvar(p)){
-                JOptionPane.showMessageDialog(null, "Produto Salvo com Sucesso!");
+            if(dao.salvar(f)){
+                JOptionPane.showMessageDialog(null, "Funcionario Salvo com Sucesso!");
                 limparCampo();
             }else{
-                JOptionPane.showMessageDialog(null, "Produto Já existe!");
+                JOptionPane.showMessageDialog(null, "Funcionario Já existe!");
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "falha ao ler");
+            JOptionPane.showMessageDialog(null, "Falha ao ler");
         } catch (ClassNotFoundException ex) {
-           JOptionPane.showMessageDialog(null, "classe n encontrada");
+           JOptionPane.showMessageDialog(null, "classe não encontrada");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
-        Produto p = montarObjeto();
+    
+        Funcionario f = montarObjeto();
         
         try{
-            if(dao.atualizar(p)){
-                JOptionPane.showMessageDialog(null, "Produto Atualizado");
+            if(dao.atualizar(f)){
+                JOptionPane.showMessageDialog(null, "Funcionario Atualizado");
             }else{
                 JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
             }
@@ -256,15 +252,15 @@ public class tela6 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    
-        Produto p = montarObjeto();
+        
+         Funcionario f = montarObjeto();
         
         try{
-            if(dao.deletar(p)){
-                JOptionPane.showMessageDialog(null, "Produto Removido com sucesso!");
+            if(dao.deletar(f)){
+                JOptionPane.showMessageDialog(null, "Funcionario Removido com sucesso!");
                 limparCampo();
             } else{
-                JOptionPane.showMessageDialog(null, "Produto não encontrado");
+                JOptionPane.showMessageDialog(null, "Funcionario não encontrado");
             }
         } catch(IOException ex){
             JOptionPane.showMessageDialog(null, "falha!");
@@ -274,23 +270,22 @@ public class tela6 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    
-        Produto p = null;
+        
+         Funcionario f = null;
         
         try{
-            p = dao.buscar((int) codigoProduto.getValue());
+            f = dao.buscar(cpf.getText());
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Falha");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "não achou");
         }
         
-        if(p == null){
-             JOptionPane.showMessageDialog(null, "Produto não Encontrado");
+        if(f == null){
+             JOptionPane.showMessageDialog(null, "Funcionario não encontrado");
         } else{
-            nomeProduto.setText(p.getNome());
-            valorProduto.setValue(p.getValor());
-            quantidadeProduto.setValue(p.getQuantidade());
+            nome.setText(f.getNome());
+            nascimento.setText(f.getDatanasci());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -311,28 +306,34 @@ public class tela6 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tela6.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tela6.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tela6.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tela6.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new tela6().setVisible(true);
+                new TelaCadastroFuncionario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JFormattedTextField codigoProduto;
+    private javax.swing.JFormattedTextField cpf;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -340,23 +341,34 @@ public class tela6 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField nomeProduto;
-    private javax.swing.JSpinner quantidadeProduto;
-    private javax.swing.JFormattedTextField valorProduto;
+    private javax.swing.JFormattedTextField nascimento;
+    private javax.swing.JTextField nome;
     // End of variables declaration//GEN-END:variables
 
-    private Produto montarObjeto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Funcionario montarObjeto() {
+        
+        Funcionario f;
+        f = new Funcionario();
+        
+        f.setNome(nome.getText());
+        f.setCpf(cpf.getText());
+        f.setDatanasci(nascimento.getText());
+        
+        return f;
     }
 
-    private void limparCampo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Funcionario limparCampo() {
+       
+        nome.setText("");
+        cpf.setText("");
+        nascimento.setText("");
+        
+        return null;
     }
 }

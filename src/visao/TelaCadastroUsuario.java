@@ -230,9 +230,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
            JOptionPane.showMessageDialog(null, "classe n encontrada");
         }
-        
-       
-        
+  
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
