@@ -15,13 +15,13 @@ import modelo.Departamento;
  */
 public interface DepartamentoDao {
     
-    public boolean salvar(Departamento d);
+    public boolean salvar(Departamento d) throws IOException, ClassNotFoundException;
     
-    public Departamento buscar(int codigo);
+    public Departamento buscar(int codigo) throws IOException, ClassNotFoundException;
     
     public List<Departamento> listar() throws IOException, ClassNotFoundException;
     
-    public boolean deletar(Departamento d);
+    public boolean deletar(Departamento d) throws IOException, ClassNotFoundException;
     
     public boolean atualizar(Departamento d) throws IOException, ClassNotFoundException; 
     

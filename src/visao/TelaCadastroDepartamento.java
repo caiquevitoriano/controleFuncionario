@@ -5,6 +5,15 @@
  */
 package visao;
 
+import controle.DepartamentoDao;
+import controle.DepartamentoDaoImpl;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Departamento;
+
 /**
  *
  * @author caique
@@ -14,7 +23,12 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
     /**
      * Creates new form tela3
      */
-    public TelaCadastroDepartamento() {
+    private DepartamentoDao dao;
+
+    public TelaCadastroDepartamento() throws IOException {
+
+        dao = new DepartamentoDaoImpl();
+
         initComponents();
     }
 
@@ -35,13 +49,13 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        codigo = new javax.swing.JFormattedTextField();
 
         jTextField3.setText("jTextField3");
 
@@ -91,15 +105,35 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
         jLabel3.setText("Codigo:");
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Cadastrar");
+        jButton1.setText("criar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Atualizar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Apagar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
+            codigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -112,9 +146,9 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
+                    .addComponent(nome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jFormattedTextField1)
+                        .addComponent(codigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,8 +157,8 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(0, 230, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(26, 26, 26)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4)))
@@ -137,13 +171,13 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -165,6 +199,79 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Departamento d = montarObjeto();
+
+        try {
+            if (dao.salvar(d)) {
+                JOptionPane.showMessageDialog(null, "Salvou!");
+                limparCampo();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ja existe");
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "falha ao ler");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "classe n encontrada");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Departamento d = null;
+
+        try {
+            d = dao.buscar(new Integer(codigo.getText()));
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "falha");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaCadastroDepartamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (d == null) {
+            JOptionPane.showMessageDialog(null, "Não encontrado");
+        } else {
+            nome.setText(d.getNome());
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Departamento d = montarObjeto();
+
+        try {
+            if (dao.atualizar(d)) {
+                JOptionPane.showMessageDialog(null, "atualizou");
+            } else {
+                JOptionPane.showMessageDialog(null, "erro");
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "falha");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "classe não encontrada");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        Departamento d = montarObjeto();
+        
+        try {
+            if (dao.deletar(d)) {
+                JOptionPane.showMessageDialog(null, "removido");
+                limparCampo();
+            } else {
+                JOptionPane.showMessageDialog(null, "não encontrado");
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "falha!");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "classe n encontrada");
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,11 +310,11 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JFormattedTextField codigo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -215,7 +322,24 @@ public class TelaCadastroDepartamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField nome;
     // End of variables declaration//GEN-END:variables
+
+    private Departamento montarObjeto() {
+
+        Departamento d = new Departamento();
+        d.setNome(nome.getText());
+        d.setCodigo(new Integer(codigo.getText()));
+
+        return d;
+    }
+
+    private Departamento limparCampo() {
+
+        nome.setText("");
+        codigo.setText("");
+
+        return null;
+    }
 }

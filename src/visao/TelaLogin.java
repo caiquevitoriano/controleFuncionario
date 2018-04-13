@@ -5,6 +5,7 @@
  */
 package visao;
 
+import controle.DepartamentoDaoImpl;
 import controle.UsuarioDao;
 import controle.UsuarioDaoImpl;
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class TelaLogin extends javax.swing.JFrame {
      * Creates new form Tela1
      */
     private UsuarioDaoImpl user;
+    private DepartamentoDaoImpl dep;
 
     public TelaLogin() {
         initComponents();

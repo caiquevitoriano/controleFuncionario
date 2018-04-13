@@ -13,85 +13,111 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Departamento;
-
 
 /**
  *
  * @author caiq-
  */
-public class DepartamentoDaoImpl implements DepartamentoDao{
-    
+public class DepartamentoDaoImpl implements DepartamentoDao {
+
     private final File file;
-    
-    public DepartamentoDaoImpl() throws IOException{
-        
-        file = new File("Aquivos/departemento.bin");
-        
-        if(!file.exists()){
+
+    public DepartamentoDaoImpl() throws IOException {
+        file = new File("departamentos.bin");
+
+        if (!file.exists()) {
             file.createNewFile();
+        }
+        
+       }
+
+    @Override
+    public boolean salvar(Departamento d) throws IOException, ClassNotFoundException {
+        if (buscar(d.getCodigo()) == null) {
+
+            List<Departamento> departamentos = listar();
+            if (departamentos.add(d)) {
+                atualizarArquivos(departamentos);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
         
     }
 
     @Override
-    public boolean salvar(Departamento d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Departamento buscar(int codigo) throws IOException, ClassNotFoundException {
 
-    @Override
-    public Departamento buscar(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Departamento> departamentos = listar();
+
+        for (Departamento d : departamentos) {
+            if (d.getCodigo() == codigo) {
+                return d;
+            }
+        }
+
+        return null;
     }
 
     @Override
     public List<Departamento> listar() throws IOException, ClassNotFoundException {
 
-        if(file.length() > 0){
-            
-            ObjectInputStream in = new ObjectInputStream( new FileInputStream(file));
-            
+        if (file.length() > 0) {
+
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+
             return (List<Departamento>) in.readObject();
-        }else{
+            
+        } else {
             return new ArrayList<>();
         }
-    }
-
-    @Override
-    public boolean deletar(Departamento d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean atualizar(Departamento d) throws IOException, ClassNotFoundException{
         
+    }
+
+    @Override
+    public boolean deletar(Departamento d) throws IOException, ClassNotFoundException {
+
         List<Departamento> departamentos = listar();
-        
-        for(int i = 0; i <departamentos.size(); i++){
-            if(departamentos.get(i).getCodigo() == d.getCodigo()){
-                
+
+        if (departamentos.remove(d)) {
+            atualizarArquivos(departamentos);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean atualizar(Departamento d) throws IOException, ClassNotFoundException {
+
+        List<Departamento> departamentos = listar();
+
+        for (int i = 0; i < departamentos.size(); i++) {
+            if (departamentos.get(i).getCodigo() == d.getCodigo()) {
+
                 departamentos.set(i, d);
-                atualizar((Departamento) departamentos);
+                atualizarArquivos(departamentos);
                 return true;
-               
+
             }
         }
-        
+
         return false;
-      
-        
+
     }
 
     private void atualizarArquivos(List<Departamento> departamentos) throws IOException, ClassNotFoundException {
-    
+
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-        
+
         out.writeObject(departamentos);
         out.close();
+        
     }
 
-       
-    
-    
-    
 }

@@ -30,7 +30,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         try {
             dao = new UsuarioDaoImpl();
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "algum erro");
+            JOptionPane.showMessageDialog(null, "erro");
         }
         
         initComponents();
@@ -65,7 +65,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         jTextField3.setText("jTextField3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 

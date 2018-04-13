@@ -63,8 +63,7 @@ public final class UsuarioDaoImpl implements UsuarioDao {
 
         if (file.length() > 0) {
 
-            ObjectInputStream in = new ObjectInputStream(
-                    new FileInputStream(file));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 
             return (List<Usuario>) in.readObject();
         } else {

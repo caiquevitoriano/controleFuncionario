@@ -25,7 +25,8 @@ public class Usuario implements Serializable {
     public Usuario(String email, String nome, String senha) {
         this.email = email;
         this.nome = nome;
-        this.senha = senha;    }
+        this.senha = senha;    
+    }
 
     public String getEmail() {
         return email;

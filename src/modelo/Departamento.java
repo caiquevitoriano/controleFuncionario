@@ -5,18 +5,29 @@
  */
 package modelo;
 
-import java.awt.List;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  *
  * @author caique
  */
-public class Departamento {
+public class Departamento implements Serializable{
     
     private String nome;
     private int codigo;
-    private List produtos[];
+    private List<Produto> produtos = new ArrayList<>();
+
+    public Departamento(String nome, int codigo) {
+        this.nome = nome;
+        this.codigo = codigo;
+    }
+
+    public Departamento() {
+    }
 
     public String getNome() {
         return nome;
@@ -34,19 +45,20 @@ public class Departamento {
         this.codigo = codigo;
     }
 
-    public List[] getProdutos() {
+    public List<Produto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List[] produtos) {
+    public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.nome);
-        hash = 59 * hash + this.codigo;
+        hash = 23 * hash + Objects.hashCode(this.nome);
+        hash = 23 * hash + this.codigo;
+        hash = 23 * hash + Objects.hashCode(this.produtos);
         return hash;
     }
 
@@ -65,9 +77,13 @@ public class Departamento {
         if (this.codigo != other.codigo) {
             return false;
         }
-        return Objects.equals(this.nome, other.nome);
-        
-        
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.produtos, other.produtos)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -75,8 +91,8 @@ public class Departamento {
         return "Departamento{" + "nome=" + nome + ", codigo=" + codigo + ", produtos=" + produtos + '}';
     }
 
+  
    
-   
-
+    
     
 }
