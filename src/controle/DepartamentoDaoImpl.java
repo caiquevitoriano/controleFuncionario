@@ -13,8 +13,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.Departamento;
 
 /**
@@ -26,7 +24,7 @@ public class DepartamentoDaoImpl implements DepartamentoDao {
     private final File file;
 
     public DepartamentoDaoImpl() throws IOException {
-        file = new File("departamentos.bin");
+        file = new File("Arquivos/departamentos.bin");
 
         if (!file.exists()) {
             file.createNewFile();
